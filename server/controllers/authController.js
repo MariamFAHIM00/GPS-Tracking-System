@@ -4,8 +4,15 @@ const User = require('../models/User');
 const crypto = require('crypto');
 const { sendVerificationMail } = require('../utils/sendVerificationMail');
 
-const createToken = (_id) => {
-    return jwt.sign({ _id }, 'secretKey', { expiresIn: '3d' });
+const createToken = (user) => {
+    const payload = {
+        user: {
+            id: user._id,
+            username: user.username,
+            email: user.email,
+        }
+    };
+    return jwt.sign(payload, process.env.SECRET_KEY , { expiresIn: '3d' });
 }
 
 const register = async (req, res) => {  
@@ -32,9 +39,7 @@ const register = async (req, res) => {
 
         sendVerificationMail(user);
 
-        const token = createToken(user._id);
-
-        res.status(201).json({ message: 'User registered successfully' });
+        res.status(201).json({ message: 'Registration successful! Please check your email for verification instructions.' });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -48,6 +53,7 @@ const login = async (req, res) => {
         if (!user) {
             return res.status(401).json({ error: 'Invalid email or password' });
         }
+
         const validPassword = await bcrypt.compare(password, user.password);
         if (!validPassword) {
             return res.status(401).json({ error: 'Invalid email or password' });
@@ -58,8 +64,9 @@ const login = async (req, res) => {
             return res.status(401).json({ error: 'Email not verified' });
         }
 
-        const token = createToken(user._id);
-        res.status(200).json({ name:user.username, email });
+        const token = createToken(user);
+        
+        res.json({ token });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -67,7 +74,7 @@ const login = async (req, res) => {
 
 const verifyEmail = async (req, res) => {
     try {
-        const emailToken = req.body.emailToken;
+        const emailToken = req.params.emailToken;
 
         if (!emailToken) {
             return res.status(404).json('EmailToken not found...');
@@ -81,13 +88,11 @@ const verifyEmail = async (req, res) => {
             await user.save();
 
             try {
-                const token = createToken(user._id);
-                return res.status(200).json({
-                    name: user.username,
-                    email: user.email,
-                    isVerified: user.isVerified,
-                });
+                console.log(1);
+                const token = createToken(user);
+                res.json({ token });
             } catch (tokenError) {
+                console.log(0);
                 // Handle error in createToken function
                 return res.status(500).json({ error: tokenError.message });
             }

@@ -10,11 +10,10 @@ const sendVerificationMail = (user) => {
 
     const tempParmas = {
         to_name: user.username,
-        from_name: "gpstracksys0@gmail.com",
+        from_name: "mariam.fahim.2003@gmail.com",
         reply_to: user.email,
         subject: 'Email Verification',
-        message:`${process.env.CLIENT_URL}/api/auth/verifyEmail`,
-        emailToken:user.emailToken
+        message:`${process.env.CLIENT_URL}/verifyEmail?emailToken=${user.emailToken}`,
     }
 
     emailjs.send(process.env.SERVICE_ID, process.env.TEMPLATE_ID, tempParmas)
