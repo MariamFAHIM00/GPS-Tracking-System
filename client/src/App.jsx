@@ -4,6 +4,7 @@ import Header from './components/global/Header.jsx';
 import Login from './pages/auth/Login.jsx';
 import Register from './pages/auth/Register.jsx';
 import Home from './pages/Home.jsx';
+import MyPosition from './pages/MyPosition.jsx';
 import {
   BrowserRouter as Router,
   Routes,
@@ -44,6 +45,7 @@ const App = () => {
           <Route path="login" element={<ProtectedRoute element={<Login />} />} />
           <Route path="/register" element={<ProtectedRoute element={<Register />} />} />
           <Route path="/verifyEmail" element={<VerifyEmail />}/>
+          <Route path="/myPosition" element={<MyPosition />} />
         </Routes>
         <ToastContainer 
           position="bottom-right"
