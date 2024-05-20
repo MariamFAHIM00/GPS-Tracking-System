@@ -14,6 +14,7 @@ import {
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import VerifyEmail from './pages/auth/VerifyEmail.jsx';
+import LiveTracking from './components/map/LiveTracking.jsx';
 
 const App = () => {
   const [logoutKey, setLogoutKey] = useState(false);
@@ -46,6 +47,7 @@ const App = () => {
           <Route path="/register" element={<ProtectedRoute element={<Register />} />} />
           <Route path="/verifyEmail" element={<VerifyEmail />}/>
           <Route path="/myPosition" element={<MyPosition />} />
+          <Route path="/liveTracking" element={<LiveTracking />} />
         </Routes>
         <ToastContainer 
           position="bottom-right"

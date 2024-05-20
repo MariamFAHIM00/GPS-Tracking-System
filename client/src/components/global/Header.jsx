@@ -21,7 +21,7 @@ const Header = ({ handleLogout }) => {
     const navItems = [
         { link: 'Home', path: '/' },
         { link: 'My Position', path: '/myPosition' },
-        { link: 'Page-Y', path: '/#S' },
+        { link: 'live tracking', path: '/liveTracking' },
         { link: 'Page-Z', path: '/#C' },
     ];
 
@@ -46,7 +46,7 @@ const Header = ({ handleLogout }) => {
                             {navItems.map(({ link, path }) => (
                                 <Link
                                     key={path}
-                                    className={`text-white uppercase font-semibold cursor-pointer p-3 rounded-lg font-ubuntu text-[13px] ${isActive(path) ? 'bg-lime-400 text-slate-950' : 'hover:bg-lime-400 hover:text-black'}`}
+                                    className={`text-white uppercase font-semibold cursor-pointer p-3 rounded-lg font-ubuntu text-[13px] ${isActive(path) ? 'bg-lime-400 text-slate-900' : 'hover:bg-lime-400 hover:text-black'}`}
                                     to={path}
                                     offset={-100}
                                 >
@@ -60,7 +60,7 @@ const Header = ({ handleLogout }) => {
                             {navItems.map(({ link, path }) => (
                                 <Link
                                     key={path}
-                                    className={`text-white uppercase font-semibold cursor-pointer p-3 rounded-lg w-full text-center text-[13px] ${isActive(path) ? 'bg-lime-400 text-slate-950' : 'hover:bg-lime-400 hover:text-black'}`}
+                                    className={`text-white uppercase font-semibold cursor-pointer p-3 rounded-lg w-full text-center text-[13px] ${isActive(path) ? 'bg-lime-400 text-slate-900' : 'hover:bg-lime-400 hover:text-black'}`}
                                     to={path}
                                     offset={-100}
                                 >
