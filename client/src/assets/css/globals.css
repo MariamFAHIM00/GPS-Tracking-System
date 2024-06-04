@@ -74,3 +74,54 @@
       @apply bg-background text-foreground;
     }
   }
+
+.sidebar{
+    scrollbar-width:thin;
+    scrollbar-color: rgb(35, 34, 34) transparent;
+}
+
+.sidebar::-webkit-scrollbar{
+    background: rgb(35, 34, 34);
+    width: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb{
+    scrollbar-color: rgb(35, 34, 34);
+    border-radius: 10px;
+}
+
+* {
+  /* scrollbar-width: thin ; */
+  scrollbar-color: black;
+}
+
+*::-webkit-scrollbar {
+  width: 3px;
+  background-color: black;
+}
+
+
+*::-webkit-scrollbar-thumb {
+  background: #8d8d8d;
+  border-radius: 5px;
+}
+
+.start-marker {
+    background-color: red;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+}
+.end-marker {
+    background-color: green;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+}
+
+.intermediate-marker{
+  background-color: black;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+}

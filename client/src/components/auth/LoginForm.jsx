@@ -16,6 +16,7 @@ import { Button } from '../ui/button';
 import axios from "axios";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {jwtDecode} from "jwt-decode";
 
 const LoginForm = () => {
     const form = useForm({
@@ -37,7 +38,17 @@ const LoginForm = () => {
             const { token } = response.data;
             if (token) {
                 localStorage.setItem('token', token);
-                navigate("/");
+                const decodedToken = jwtDecode(token);
+                 // Check if user data exists
+                if (decodedToken && decodedToken.user) {
+                    if(decodedToken.user.role == 'admin'){
+                        navigate('/dashboard');
+                    }else if(decodedToken.user.role == 'employee'){
+                        navigate('/console');
+                    }else{
+                        navigate('/');
+                    }
+                }
             }
         } catch (error) {
             console.error('Login failed:', error.response.data.error);
@@ -50,8 +61,8 @@ const LoginForm = () => {
             <CardWrapper
                 label = "Welcome Back!!"
                 title = "Sign In"
-                backButtonHref = "/register"
-                backButtonLabel = "You don't have an account? Register Here"
+                backButtonHref = "/#"
+                backButtonLabel = "Forgot Your Password? Reset here!!"
             >
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
@@ -65,7 +76,7 @@ const LoginForm = () => {
                                             <div className='flex'>
                                             <FormLabel> Email Address</FormLabel>
                                             </div>
-                                            <FormControl className= {"focus:border-lime-400 border-2"}>
+                                            <FormControl className= {"focus:border-lime-400 border-2 border-lime-400 bg-black"}>
                                                 <Input {...field} type="email" placeholder="Enter your email address"/>
                                             </FormControl>
                                             <FormMessage/>
@@ -82,7 +93,7 @@ const LoginForm = () => {
                                     return(
                                         <FormItem>
                                             <FormLabel>Password</FormLabel>
-                                            <FormControl className= {"focus:border-lime-400 border-2"}>
+                                            <FormControl className= {"focus:border-lime-400 border-2 border-lime-400 bg-black"}>
                                                 <Input  {...field} type="password" placeholder="Enter your password"/>
                                             </FormControl>
                                             <FormMessage/>

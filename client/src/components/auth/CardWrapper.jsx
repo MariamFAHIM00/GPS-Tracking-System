@@ -12,15 +12,15 @@ const CardWrapper = (props) => {
     const { label, title, backButtonHref, backButtonLabel, children } = props;
 
     return (
-        <Card className={"shadow-md"}>
+        <Card className={"shadow-md bg-black text-white w-[350px] border-lime-400"}>
             <CardHeader>
                 <AuthHeader label={label} title={title}/>
-            </CardHeader>
-            <CardContent>
+            </CardHeader> 
+            <CardContent >
                 {children}
             </CardContent>
             <CardFooter>
-                <BackButton href={backButtonHref} label={backButtonLabel} />
+                <BackButton href={backButtonHref} label={backButtonLabel}/>
             </CardFooter>
         </Card>
     );

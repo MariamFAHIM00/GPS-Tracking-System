@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate, useLocation } from "react-router-dom";
 import { FaBars, FaXmark } from "react-icons/fa6";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '../ui/button';
 import PropTypes from 'prop-types';
 

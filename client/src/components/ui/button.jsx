@@ -19,7 +19,7 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         signIn: "bg-lime-400 text-black hover:bg-white",
-        logIn:"bg-lime-400 text-black border-2 border-black hover:bg-white hover:text-black hover:border-2 hover:border-lime-400"
+        logIn:"bg-lime-400 text-black border-2 border-black hover:bg-black hover:text-white hover:border-2 hover:border-lime-400"
       },
       size: {
         default: "h-10 px-4 py-2",

@@ -4,3 +4,35 @@
     margin-top: 20px;
 }
 
+.marker-icon {
+    background-color: blue; /* default color */
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+}
+
+.marker-icon.red {
+    background-color: red;
+}
+
+.custom-marker {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: blue; /* Default color, override in specific classes */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+}
+
+.blue-marker {
+    background-color: blue;
+}
+
+.green-marker {
+    background-color: green;
+}
+
+

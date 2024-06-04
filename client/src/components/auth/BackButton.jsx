@@ -6,7 +6,7 @@ const BackButton = (props) => {
     const { href, label } = props;
     return (
         <Button variant={"link"} className={"font-normal w-full"}>
-            <Link to={href}> {label} </Link>
+            <Link className={"text-[#a3e635]"} to={href}> {label} </Link>
         </Button>
     );
 }
