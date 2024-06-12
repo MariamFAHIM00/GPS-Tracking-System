@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
-import { MapContainer, TileLayer, Marker, Polygon, Popup, Polyline } from 'react-leaflet';
-import MarkerClusterGroup from 'react-leaflet-cluster';
+import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
 import L from 'leaflet';
 import "leaflet/dist/leaflet.css";
 import '../../../assets/css/map.css';
@@ -16,20 +15,6 @@ const ZonesMap = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [loading, setLoading] = useState(true); 
     const [selectedVehicleData, setSelectedVehicleData] = useState(null);
-    const [zones, setZones] = useState([]);
-    
-    useEffect(() => {
-        const fetchZones = async () => {
-            try {
-                const response = await axios.get('http://localhost:5000/api/zones');
-                setZones(response.data);
-            } catch (error) {
-                console.error('Error fetching zones:', error);
-            }
-        };
-
-        fetchZones();
-    }, []);
 
     useEffect(() => {
         const fetchVehicles = async () => {
@@ -107,33 +92,8 @@ const ZonesMap = () => {
 
     const handleVehicleSelect = (vehicleName) => {
         setSelectedVehicle(vehicleName);
-        if (vehicleName === "All Cars") {
-            setSelectedVehicleData(null);
-        } else {
             const vehicleData = vehicles.find(vehicle => vehicle.name === vehicleName);
             setSelectedVehicleData(vehicleData);
-        }
-    };
-
-    const isPointInPolygon = (point, vs) => {
-        const x = point[0], y = point[1];
-
-        let inside = false;
-        for (let i = 0, j = vs.length - 1; i < vs.length; j = i++) {
-            const xi = vs[i][0], yi = vs[i][1];
-            const xj = vs[j][0], yj = vs[j][1];
-
-            const intersect = ((yi > y) !== (yj > y)) &&
-                (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
-            if (intersect) inside = !inside;
-        }
-
-        return inside;
-    };
-
-    const isVehicleInAnyZone = (vehicle) => {
-        const vehicleLocation = [vehicle.location.lat, vehicle.location.lng];
-        return zones.some(zone => isPointInPolygon(vehicleLocation, zone.coordinates.map(coord => [coord.lat, coord.lng])));
     };
 
     useEffect(() => {
@@ -224,9 +184,6 @@ const ZonesMap = () => {
                         />
                     </div>
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                        <DropdownMenuItem className="hover:bg-gray-700 py-2 px-4" onSelect={() => handleVehicleSelect("All Cars")}>
-                            All Cars
-                        </DropdownMenuItem>
                         {filteredVehicles.map((vehicle) => (
                             <DropdownMenuItem
                                 key={vehicle._id}
@@ -251,26 +208,6 @@ const ZonesMap = () => {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 />
-                {zones.map(zone => (
-                    <Polygon
-                        key={zone._id}
-                        positions={zone.coordinates.map(coord => [coord.lat, coord.lng])}
-                        color={"#000000"}
-                    >
-                        <Popup>{zone.name}</Popup>
-                    </Polygon>
-                ))}
-                <MarkerClusterGroup>
-                    {selectedVehicle === "All Cars" && filteredVehicles.map((vehicle) => (
-                        <Marker
-                            key={vehicle._id}
-                            position={[vehicle.location.lat, vehicle.location.lng]}
-                            icon={L.divIcon({ className: isVehicleInAnyZone(vehicle) ? 'marker-icon' : 'marker-icon red' })}
-                        >
-                            <Popup>{vehicle.name}</Popup>
-                        </Marker>
-                    ))}
-                </MarkerClusterGroup>
                 {vehiclePaths.map(({ vehicleId, paths }) => (
                     selectedVehicleData && vehicleId === selectedVehicleData._id && paths.map((path, index) => (
                         <React.Fragment key={index}>

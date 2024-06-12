@@ -91,6 +91,7 @@ const App = () => {
             <Route path="/dashboard/geoFencing" element={<ProtectedRoute element={<Dashboard />} allowedRoles={['admin']} />} />
             <Route path="/dashboard/roadHistory" element={<ProtectedRoute element={<Dashboard />} allowedRoles={['admin']} />} />
             <Route path="/dashboard/orders" element={<ProtectedRoute element={<Dashboard />} allowedRoles={['admin']} />} />
+            <Route path="/dashboard/feedbacks" element={<ProtectedRoute element={<Dashboard />} allowedRoles={['admin']} />} />
             <Route path="/console" element={<ProtectedRoute element={<Console />} allowedRoles={['employee']} />} />
             <Route path="/verifyEmail" element={<VerifyEmail />}/>
           </Routes>

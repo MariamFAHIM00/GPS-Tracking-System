@@ -12,6 +12,7 @@ import LastPosition from "../../components/admin/tracks/LastPosition";
 import GeoFencing from "../../components/admin/tracks/GeoFencing";
 import RoadHistory from "../../components/admin/tracks/RoadHistory";
 import Orders from "../../components/admin/orders/Orders";
+import Feedbacks from "../../components/admin/feedbacks/Feedbacks";
 
 
 const Dashboard = () => {
@@ -38,7 +39,10 @@ const Dashboard = () => {
         content = <RoadHistory />;
     }else if(pathname === "/dashboard/orders"){
         content = <Orders />;
+    }else if(pathname === "/dashboard/feedbacks"){
+        content = <Feedbacks />;
     }
+
     return (
         <div className="flex min-h-screen">
             <Sidebar toggleCollapse={toggleCollapse}/>

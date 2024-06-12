@@ -97,7 +97,7 @@ const ZonesMap = () => {
                         {selectedVehicle || "Select Vehicle"}
                     </button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="bg-lime-400 border border-black rounded mt-2 w-[350px] z-20 relative md:w-[600px] sm:w-[400px]">
+                <DropdownMenuContent className="bg-lime-400 rounded mt-2 w-[350px] z-20 relative md:w-[600px] sm:w-[400px]">
                     <div className="flex justify-center mb-1">
                         <Input
                             type="search"

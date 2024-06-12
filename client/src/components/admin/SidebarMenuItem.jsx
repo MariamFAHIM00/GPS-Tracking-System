@@ -1,6 +1,6 @@
 import { MdOutlineDashboard, MdAccountCircle, MdLogout, MdOutlineCarRental } from "react-icons/md";
 import { FaUsersGear, FaRoute, FaChevronRight, FaChevronDown } from "react-icons/fa6";
-import { FaCar } from "react-icons/fa";
+import { FaCar, FaComments } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState } from "react";
 import PropTypes from 'prop-types';
@@ -54,6 +54,11 @@ const SidebarMenuItem = ({ toggleCollapse }) => {
                     title: 'Orders', 
                     path: '/dashboard/orders',
                     icon: <MdOutlineCarRental size={20} />
+                },
+                { 
+                    title: 'Feedbacks', 
+                    path: '/dashboard/feedbacks',
+                    icon: <FaComments size={20} />
                 }
             ]
         }, 
